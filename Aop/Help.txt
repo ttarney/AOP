@@ -1,0 +1,38 @@
+Setting up intellisense for proxyconfiguration
+1) generate schema for section
+2) copy schema to C:\Program Files (x86)\Microsoft Visual Studio 12.0\Xml\Schemas
+3) Modify catalog.xml add:  <Association extension="config" schema="%InstallRoot%/xml/schemas/ProxyConfiguration.xsd" condition="$TargetFrameworkMoniker = '.NETFramework,Version=v4.5'" />
+4) add <proxyConfiguration xmlns="http://tempuri.org/proxyconfiguration.xsd"
+                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> to config file section in use
+<configuration>
+  <configSections>
+    <section name="log4net"
+              type="log4net.Config.Log4NetConfigurationSectionHandler, log4net"></section>
+
+    <sectionGroup name="ProxyConfigurationGroup">
+      <section name="ProxyConfigurations"
+               type="ProxyConfiguration.ProxyConfigurationSection, ProxyConfiguration"
+               allowLocation="false"
+               allowDefinition="Everywhere" />
+   
+    </sectionGroup>
+  </configSections>
+  <ProxyConfigurationGroup>
+    <ProxyConfigurations>
+      <proxyconfiguration>
+        <add objecttype="Foo"
+             active="true">
+        </add>
+      </proxyconfiguration>
+    </ProxyConfigurations>
+  </ProxyConfigurationGroup>
+</configuration>
+
+
+1) add interceptor and derive from BaseInterceptor
+2) override Intercept
+3) add interceptor to ProxyConfiguration.xsd
+4) redeploy ProxyConfiguration to C:\Program Files (x86)\Microsoft Visual Studio 12.0\Xml\Schemas - or vs install directory
+5) 
+
+
