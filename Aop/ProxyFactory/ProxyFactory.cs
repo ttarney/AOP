@@ -1,4 +1,5 @@
 ﻿using Castle.DynamicProxy;
+using Core.Attributes;
 using Core.Interceptors;
 using ProxyConfiguration;
 using ProxyFactory.Strategies.InterceptorCreation;
@@ -43,24 +44,41 @@ namespace ProxyFactory
         {
             Type invocationType = typeof(TType);
             List<IInterceptor> interceptors = new List<IInterceptor>();
+            bool hasClassLevelAttribute = false;
+            // if we have a class level attribute
             foreach (var attribute in invocationType.GetCustomAttributes(false))
             {
-
-            }
-
-            // get the custom attributes at the method level
-            MethodInfo[] methodInfos = invocationType.GetMethods();
-            foreach (MethodInfo methodInfo in methodInfos)
-            {
-                // if we have TimeAllMethods add interceptor for every method on the class
-                foreach (var methodAttribute in methodInfo.GetCustomAttributes(false))
+                // we have to handle all methods
+                if (attribute.GetType() == typeof(Core.Attributes.FeatureClassAttribute))
                 {
-
-                    dynamic data = methodInfo;
-                    BaseInterceptor interceptor = BaseInterceptorFactory.Create(methodAttribute as Attribute);
-                    if (interceptor != null)
+                    hasClassLevelAttribute = true;
+                    MethodInfo[] methodInfos = invocationType.GetMethods();
+                    foreach (MethodInfo methodInfo in methodInfos)
                     {
-                        interceptors.Add(interceptor);
+                        FeatureMethodAttribute featureMethodAttribute = new FeatureMethodAttribute((attribute as FeatureClassAttribute).FeatureType);
+                        BaseInterceptor interceptor = BaseInterceptorFactory.Create(featureMethodAttribute as Attribute);
+                        if (interceptor != null)
+                        {
+                            interceptors.Add(interceptor);
+                        }
+                    }
+                }
+            }
+            // if this is defined at the class level we will ignore any other overrides 
+            if (!hasClassLevelAttribute)
+            {
+                // get the custom attributes at the method level
+                MethodInfo[] methodInfos = invocationType.GetMethods();
+                foreach (MethodInfo methodInfo in methodInfos)
+                {
+                    // if we have TimeAllMethods add interceptor for every method on the class
+                    foreach (var methodAttribute in methodInfo.GetCustomAttributes(false))
+                    {
+                        BaseInterceptor interceptor = BaseInterceptorFactory.Create(methodAttribute as Attribute);
+                        if (interceptor != null)
+                        {
+                            interceptors.Add(interceptor);
+                        }
                     }
                 }
             }

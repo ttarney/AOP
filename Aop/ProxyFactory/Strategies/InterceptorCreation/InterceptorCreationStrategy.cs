@@ -18,9 +18,6 @@ namespace ProxyFactory.Strategies.InterceptorCreation
         IInterceptor Create();
         IInterceptor Create(string id);
     }
-
-    
-
     public static class BaseInterceptorFactory
     {
         public static BaseInterceptor Create(Attribute attribute)
@@ -33,8 +30,6 @@ namespace ProxyFactory.Strategies.InterceptorCreation
             return baseInterceptor;
         }
     }
-
-
     public static class BaseDiagnosticInterceptorFactory<TListener> where TListener : TraceListener
     {
         public static BaseDiagnosticInterceptor<TListener> Create(string type, dynamic data) 
@@ -53,7 +48,6 @@ namespace ProxyFactory.Strategies.InterceptorCreation
             return baseInterceptor;
         }
     }
-
     public static class MethodDetailsInterceptorFactory<TListener> where TListener : TraceListener
     {
         public static IInterceptor Create(dynamic data)
@@ -75,7 +69,6 @@ namespace ProxyFactory.Strategies.InterceptorCreation
         //    return new MethodDetailsInterceptor();
         //}
     }
-
     public static class FeatureMethodInterceptorFactory
     {
         public static BaseInterceptor Create<T>(Attribute attribute)
@@ -99,7 +92,6 @@ namespace ProxyFactory.Strategies.InterceptorCreation
         //    return new MethodTimingInterceptor<Log4netTraceListener>(method);
         //}
     }
-
     //public class MethodCallInterceptorFactory : IInterceptorCreation
     //{
     //    public IInterceptor Create(string id)
@@ -112,8 +104,6 @@ namespace ProxyFactory.Strategies.InterceptorCreation
     //        return new MethodCallInterceptor();
     //    }
     //}
-
-
     public class InterceptorCreationContext : IInterceptorCreation
     {
           //{

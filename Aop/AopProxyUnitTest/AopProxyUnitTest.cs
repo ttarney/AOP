@@ -100,15 +100,24 @@ namespace AopProxyUnitTest
             }
 
             [TestMethod]
-            public void Test_feature_flag_Successful()
+            public void Test_method_feature_flag_Successful()
             {
-                IProxyFactory<TempFeatureFlagTest> proxyFactory = new AttributeProxyFactory<TempFeatureFlagTest>();
-                TempFeatureFlagTest foo = proxyFactory.Create();
+                IProxyFactory<MethodFeatureFlagTest> proxyFactory = new AttributeProxyFactory<MethodFeatureFlagTest>();
+                MethodFeatureFlagTest foo = proxyFactory.Create();
                 // will only call if exposed but you can still call it
                 foo.Foo();
-
                 foo.MyMethodLevelFeature_Method();
+            }
 
+            [TestMethod]
+            public void Test_class_feature_flag_Successful()
+            {
+                IProxyFactory<ClassFeatureFlagTest> proxyFactory = new AttributeProxyFactory<ClassFeatureFlagTest>();
+                ClassFeatureFlagTest foo = proxyFactory.Create();
+                //// will only call if exposed but you can still call it
+                foo.Foo();
+                string x = "BEFORE";
+                x = foo.ToString();                
             }
         }
     }
