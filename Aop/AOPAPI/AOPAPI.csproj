@@ -19,7 +19,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Interceptors\AOPInterceptors.csproj" />
-    <ProjectReference Include="..\MethodTimingAttribute\AOPAttributes.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AOPAttributes">
+      <HintPath>..\..\AOPAttributes\AOPAttributes\bin\Debug\AOPAttributes.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

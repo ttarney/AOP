@@ -1,5 +1,6 @@
-﻿using Castle.DynamicProxy;
-using Core.Attributes;
+﻿using AOPAttributes;
+using Castle.DynamicProxy;
+
 using Core.Interceptors;
 using ProxyConfiguration;
 using ProxyFactory.Strategies.InterceptorCreation;
@@ -18,20 +19,21 @@ namespace ProxyFactory
     public interface IProxyFactory<TType> where TType : class, new()
     {
         TType Create();
+        TType Create<TListener>();
     }
 
-    public class ConfigurationProxyFactory<TType> : IProxyFactory<TType> where TType : class, new()
-    {
-        public ConfigurationProxyFactory()
-        {
+    //public class ConfigurationProxyFactory<TType> : IProxyFactory<TType> where TType : class, new()
+    //{
+    //    public ConfigurationProxyFactory()
+    //    {
 
-        }
+    //    }
 
-        public TType Create()
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public TType Create()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     public class AttributeProxyFactory<TType> : IProxyFactory<TType> where TType : class, new()
     {
@@ -40,6 +42,10 @@ namespace ProxyFactory
 
         }
 
+        public TType Create<TListener>() 
+        {
+            return null;
+        }
         public TType Create()
         {
             Type invocationType = typeof(TType);
@@ -49,7 +55,7 @@ namespace ProxyFactory
             foreach (var attribute in invocationType.GetCustomAttributes(false))
             {
                 // we have to handle all methods
-                if (attribute.GetType() == typeof(Core.Attributes.FeatureClassAttribute))
+                if (attribute.GetType() == typeof(FeatureClassAttribute))
                 {
                     hasClassLevelAttribute = true;
                     MethodInfo[] methodInfos = invocationType.GetMethods();

@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace Core.Attributes
 {
 
-    public class ProxyAttributeBase : Attribute
-    {
-        public bool Active { get; set; }
-    }
+
 }
     
     

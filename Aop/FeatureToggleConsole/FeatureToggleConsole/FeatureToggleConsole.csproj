@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AOPDemoClasses">
+      <HintPath>..\..\..\AOPDemoClasses\AOPDemoClasses\bin\Debug\AOPDemoClasses.dll</HintPath>
+    </Reference>
     <Reference Include="FeatureToggle, Version=4.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\FeatureToggle.4.0.2\lib\net461\FeatureToggle.dll</HintPath>
     </Reference>
@@ -111,12 +114,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\MethodTimingAttribute\AOPAttributes.csproj">
-      <Project>{3495a202-ab57-40d3-a1d2-d5393c89137c}</Project>
-      <Name>AOPAttributes</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,6 +38,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AOPAttributes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\AOPAttributes\AOPAttributes\bin\Debug\AOPAttributes.dll</HintPath>
+    </Reference>
+    <Reference Include="AOPDemoClasses">
+      <HintPath>..\..\AOPDemoClasses\AOPDemoClasses\bin\Debug\AOPDemoClasses.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
@@ -182,10 +189,6 @@
     <ProjectReference Include="..\Interceptors\AOPInterceptors.csproj">
       <Project>{c9dc6547-e6ca-4b56-8b23-77aed9bb614e}</Project>
       <Name>AOPInterceptors</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MethodTimingAttribute\AOPAttributes.csproj">
-      <Project>{3495a202-ab57-40d3-a1d2-d5393c89137c}</Project>
-      <Name>AOPAttributes</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProxyConfiguration\ProxyConfiguration.csproj">
       <Project>{99493669-c509-4ca0-a01e-e4f641a23415}</Project>

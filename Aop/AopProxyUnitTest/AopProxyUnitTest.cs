@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using System.Diagnostics;
-using Core.Attributes;
+
 using Core.Interceptors;
 using ProxyConfiguration;
 
@@ -12,68 +12,14 @@ using System.Collections.Generic;
 using TraceListeners;
 using AopProxyUnitTest.FeatureFlags;
 using ProxyFactory;
+using AOPAttributes;
+using AOPDemoClasses;
 
 namespace AopProxyUnitTest
 {
-    public class Temp
-    {
-        public string Test;
-
-        public Temp(string test)
-        {
-            Test = test;
-        }
-
-        public override string ToString()
-        {
-            return Test;
-        }
-    }
-
+   
     //[TimeAllMethods(LogTiming = true)]
-    public class Foo
-    {
-        public string X { get; set; }
-        public Foo()
-        {
-            X = "before";
-        }
 
-        //[MethodDetailLogging(LogDetail = true)]
-        //[MethodTimingAttribute(LogTiming = true)]
-        public virtual int FooBaz(int x, string y, double foo, Temp temp)
-        {
-            System.Threading.Thread.Sleep(1544);
-            return 1;
-        }
-
-        //[MethodDetailLogging(LogDetail = true)]
-        //[MethodTimingAttribute(LogTiming = true)]
-        public virtual int Bar(int x)
-        {
-           // X = "after";
-            System.Threading.Thread.Sleep(150);
-            return 1;
-        }
-
-
-        [MethodDetailLogging(Property = "X", Stage = "both", LogDetail = true)]
-        //[MethodTimingAttribute(LogTiming = true)]
-        public virtual int Baz(int x, string y, double foo)
-        {
-            System.Threading.Thread.Sleep(1000);
-
-            X = "Baz changed X"; 
-            return 1;
-        }
-
-       
-
-        public override string ToString()
-        {
-            return X.ToString();
-        }
-   } 
 
 
     public class AopProxyUnitTest
@@ -93,10 +39,14 @@ namespace AopProxyUnitTest
             [TestMethod]
             public void Test_Create_Object_Attribute_Successful()
             {
-                Foo foo = ProxyFactory.ProxyFactory<Foo>.CreateFromAttributes<Log4netTraceListener>();
-                foo.Bar(3);
-                foo.Baz(5888, "hello there", 45.44);
-                foo.FooBaz(5888, "hello there", 45.44, new Temp("ouch"));
+                Foo foo1 = ProxyFactory.ProxyFactory<Foo>.CreateFromAttributes<Log4netTraceListener>();
+                //Foo foo = ProxyFactory.ProxyFactory<Foo>.CreateFromAttributes<Log4netTraceListener>();
+                IProxyFactory<Foo> proxyFactory = new AttributeProxyFactory<Foo>();
+
+                Foo foo2 = proxyFactory.Create<Log4netTraceListener>();
+                foo2.Bar(3);
+                foo2.Baz(5888, "hello there", 45.44);
+                foo2.FooBaz(5888, "hello there", 45.44, new Temp("ouch"));
             }
 
             [TestMethod]
@@ -115,6 +65,9 @@ namespace AopProxyUnitTest
                 IProxyFactory<ClassFeatureFlagTest> proxyFactory = new AttributeProxyFactory<ClassFeatureFlagTest>();
                 ClassFeatureFlagTest foo = proxyFactory.Create();
                 //// will only call if exposed but you can still call it
+
+                foo.Bar();
+                foo.Baz();
                 foo.Foo();
                 string x = "BEFORE";
                 x = foo.ToString();                

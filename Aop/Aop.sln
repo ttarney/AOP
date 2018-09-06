@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomAttributes", "CustomA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interceptors", "Interceptors", "{0D5800CB-A747-4C05-9B72-A07C252852D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOPAttributes", "MethodTimingAttribute\AOPAttributes.csproj", "{3495A202-AB57-40D3-A1D2-D5393C89137C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProxyGenerationHooks", "ProxyGenerationHooks", "{1B05F93F-6D17-453D-9EE3-1FAEA0E9B620}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AopProxyGenerationHook", "AopProxyGenerationHook\AopProxyGenerationHook.csproj", "{73EBD1E5-4197-492C-AAF8-83291268B1EB}"
@@ -50,10 +48,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3495A202-AB57-40D3-A1D2-D5393C89137C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3495A202-AB57-40D3-A1D2-D5393C89137C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3495A202-AB57-40D3-A1D2-D5393C89137C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3495A202-AB57-40D3-A1D2-D5393C89137C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{73EBD1E5-4197-492C-AAF8-83291268B1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{73EBD1E5-4197-492C-AAF8-83291268B1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73EBD1E5-4197-492C-AAF8-83291268B1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -99,7 +93,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{3495A202-AB57-40D3-A1D2-D5393C89137C} = {36E5A07A-ACA9-45C3-8672-598B0B211168}
 		{73EBD1E5-4197-492C-AAF8-83291268B1EB} = {1B05F93F-6D17-453D-9EE3-1FAEA0E9B620}
 		{562F90F2-3EC3-4278-8D96-4517DA4D2B67} = {9D981631-C20A-489E-ACA3-4B6D1973013C}
 		{E590A6D9-41A0-4AE4-833C-36F30F1110D2} = {0EA61006-C353-4994-AADC-BC1834BC037D}

@@ -1,6 +1,7 @@
-﻿using AOPInterceptors;
+﻿using AOPAttributes;
+using AOPInterceptors;
 using Castle.DynamicProxy;
-using Core.Attributes;
+
 using Core.Interceptors;
 using System;
 using System.Collections.Generic;
@@ -23,31 +24,42 @@ namespace ProxyFactory.Strategies.InterceptorCreation
         public static BaseInterceptor Create(Attribute attribute)
         {
             BaseInterceptor baseInterceptor = null;
-            if (attribute.GetType() == typeof(Core.Attributes.FeatureMethodAttribute))
+            if (attribute.GetType() == typeof(FeatureMethodAttribute))
             {
                 baseInterceptor = FeatureMethodInterceptorFactory.Create<FeatureMethodAttribute>((attribute as FeatureMethodAttribute));
             }
             return baseInterceptor;
         }
     }
+
     public static class BaseDiagnosticInterceptorFactory<TListener> where TListener : TraceListener
     {
         public static BaseDiagnosticInterceptor<TListener> Create(string type, dynamic data) 
         {
             // add strategies here
             BaseDiagnosticInterceptor<TListener> baseInterceptor = null;
-            if(type == "Core.Attributes.MethodTimingAttribute")
+            if(type == "AOPAttributes.MethodTimingAttribute")
             {
                 baseInterceptor = MethodTimingInterceptorFactory<TListener>.Create(data);
             }
 
-            else if (type == "Core.Attributes.MethodDetailLoggingAttribute")
+            else if (type == "AOPAttributes.MethodDetailLoggingAttribute")
             {
                 baseInterceptor = MethodDetailsInterceptorFactory<TListener>.Create(data);
             }
             return baseInterceptor;
         }
     }
+
+
+
+
+
+
+
+
+
+
     public static class MethodDetailsInterceptorFactory<TListener> where TListener : TraceListener
     {
         public static IInterceptor Create(dynamic data)
